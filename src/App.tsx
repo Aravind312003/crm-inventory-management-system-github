@@ -30,7 +30,8 @@ export default function App() {
   return (
     <AuthProvider>
       <ThemeProvider>
-        <BrowserRouter>
+        {/* basename ensures routing works inside the GitHub subfolder */}
+        <BrowserRouter basename="/crm-inventory-management-system-github">
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -47,6 +48,8 @@ export default function App() {
               <Route path="customer-list" element={<CustomerList />} />
               <Route path="settings" element={<Settings />} />
             </Route>
+            {/* Catch-all to prevent white screens on refresh */}
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
