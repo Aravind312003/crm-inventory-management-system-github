@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout.tsx';
 import Dashboard from './pages/Dashboard.tsx';
 import Suppliers from './pages/Suppliers.tsx';
@@ -30,8 +30,8 @@ export default function App() {
   return (
     <AuthProvider>
       <ThemeProvider>
-        {/* basename ensures routing works inside the GitHub subfolder */}
-        <BrowserRouter basename="/crm-inventory-management-system-github">
+        {/* HashRouter is used here to prevent 404 errors on GitHub Pages refresh */}
+        <HashRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -48,10 +48,10 @@ export default function App() {
               <Route path="customer-list" element={<CustomerList />} />
               <Route path="settings" element={<Settings />} />
             </Route>
-            {/* Catch-all to prevent white screens on refresh */}
+            {/* Catch-all route */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </ThemeProvider>
     </AuthProvider>
   );
